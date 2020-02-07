@@ -1,6 +1,6 @@
 # Solutions
 
-Snippet 0x00
+## Snippet 0x00
 ```
     xor      eax,eax
     lea      rbx,[0]
@@ -13,7 +13,7 @@ Snippet 0x00
 ```
 Different ways of setting several general purpose registers to 0.
 
-Snippet 0x01
+## Snippet 0x01
 ```
 .loop:
     xadd     rax,rdx
@@ -21,7 +21,7 @@ Snippet 0x01
 ```
 Computes the rcx-th term of the Fibonacci sequence, assuming the initial state rax=0, rdx=1.
 
-Snippet 0x02
+## Snippet 0x02
 ```
     neg      rax
     sbb      rax,rax
@@ -29,7 +29,7 @@ Snippet 0x02
 ```
 Boolean cast: rax := bool(rax), i.e. rax := rax ? 1 : 0.
 
-Snippet 0x03
+## Snippet 0x03
 ```
     sub      rdx,rax
     sbb      rcx,rcx
@@ -38,18 +38,18 @@ Snippet 0x03
 ```
 Minimum function: rax := min(rax, rdx).
 
-Snippet 0x04
+## Snippet 0x04
     xor      al,0x20
 Replaces uppercase with lowercase characters and viceversa.
 
-Snippet 0x05
+## Snippet 0x05
 ```
     sub      rax,5
     cmp      rax,4
 ```
 Allows to branch depending on whether rax is in range [5,9] using only one jbe jump.
 
-Snippet 0x06
+## Snippet 0x06
 ```
     not      rax
     inc      rax
@@ -57,7 +57,7 @@ Snippet 0x06
 ```
 Does nothing since the instructions cancel each other.
 
-Snippet 0x07
+## Snippet 0x07
 ```
     inc      rax
     neg      rax
@@ -66,7 +66,7 @@ Snippet 0x07
 ```
 Does nothing since the instructions cancel each other.
 
-Snippet 0x08
+## Snippet 0x08
 ```
     add      rax,rdx
     rcr      rax,1
@@ -75,7 +75,7 @@ Computes the average, i.e. rax := (rax + rdx) / 2.
 
 Note that it prevents overflow issues since rcr does a 33-bit rotation using the CF flag.
 
-Snippet 0x09
+## Snippet 0x09
 ```
     shr      rax,3
     adc      rax,0
@@ -84,7 +84,7 @@ Computes rax := (rax + 4) / 8.
 
 Note this is computing rax / 8 and rounding to the nearest integer (thanks @ZaneH).
 
-Snippet 0x0A
+## Snippet 0x0A
 ```
     add      byte [rdi],1
 .loop:
@@ -94,7 +94,7 @@ Snippet 0x0A
 ```
 Increments by one an arbitrarily long little-endian integer at rdi.
 
-Snippet 0x0B
+## Snippet 0x0B
 ```
     not      rdx
     neg      rax
@@ -102,7 +102,7 @@ Snippet 0x0B
 ```
 Computes the negation of the 128-bit integer stored in the RDX:RAX registers (thanks Aviya Erenfeld!).
 
-Snippet 0x0C
+## Snippet 0x0C
 ```
     mov      rcx,rax
     xor      rcx,rbx
@@ -119,7 +119,7 @@ Registers rax, rcx end up with the same value, thanks to distributivity of ROR (
 rcx = rax
 rcx = (rcx ^ rbx) >> 13
 rax = (rax >> 13) ^ (rbx >> 13)
-Snippet 0x0D
+## Snippet 0x0D
 ```
     mov      rdx,rbx
 
@@ -137,7 +137,7 @@ Registers rdx, rbx end up with the same value, thanks to distributivity of AND (
 rdx = rbx
 rbx = (rbx & rax) ^ (rcx & rax)  // Associativity of AND
 rax = (rdx & rax) ^ (rcx & rax)  // Commutativity of XOR
-Snippet 0x0E
+## Snippet 0x0E
 ```
     mov      rcx,rax
     and      rcx,rbx
@@ -155,7 +155,7 @@ rcx = rax
 rcx = ~(rcx & rbx)
 rax = ~rax | ~rbx
 
-Snippet 0x0F
+## Snippet 0x0F
 ```
 .loop:
     xor      byte [rsi],al
@@ -171,7 +171,7 @@ rsi[3] ^= rsi[2]
 ...
 This resembles a 8-bit CBC encryption scheme using al as IV, except for the fact that it uses the identity function as block cipher encryption instead of a pseudorandom function.
 
-Snippet 0x10
+## Snippet 0x10
 ```
     push     rax
     push     rcx
@@ -191,7 +191,7 @@ Snippet 0x10
 ```
 Different ways of swapping the contents of rax and rcx.
 
-Snippet 0x11
+## Snippet 0x11
 ```
 .loop:
     mov      dl,byte [rsi]
@@ -203,7 +203,7 @@ Snippet 0x11
 ```
 Compares two buffers rsi and rdi of length rcx. Assuming al is zero-initialized, it will remain as 0 unless the buffers differ.
 
-Snippet 0x12
+## Snippet 0x12
 ```
     mov      rcx,rdx
     and      rdx,rax
@@ -212,7 +212,7 @@ Snippet 0x12
 ```
 Computes (rax | rdx) + (rax & rdx), which can be simplified to rax + rdx.
 
-Snippet 0x13
+## Snippet 0x13
 ```
     mov      rcx,0x40
 .loop:
@@ -226,7 +226,7 @@ Computes rax + rbx.
 
 See also: https://en.wikipedia.org/wiki/Adder_(electronics)
 
-Snippet 0x14
+## Snippet 0x14
 ```
     mov      rcx,rax
     and      rcx,rdx
@@ -238,7 +238,7 @@ Snippet 0x14
 ```
 Computes the average rounded to the lowest integer, i.e. rax := floor((rax + rdx) / 2).
 
-Snippet 0x15
+## Snippet 0x15
 ```
     mov      rdx,0xffffffff80000000
     add      rax,rdx
@@ -248,7 +248,7 @@ Casts the int32_t value in eax to an int64_t value in rax.
 
 Note that this requires the 32 most significant bits in rax to be cleared.
 
-Snippet 0x16
+## Snippet 0x16
 ```
     xor      rax,rbx
     xor      rbx,rcx
@@ -270,13 +270,13 @@ Observations: - If rax == rbx: No overflow. - If rcx == rbx: No overflow. - If r
 
 TODO: No idea about this one.
 
-Snippet 0x17
+## Snippet 0x17
     cqo
     xor      rax,rdx
     sub      rax,rdx
 Computes the absolute value of rax, i.e. rax := abs(rax).
 
-Snippet 0x18
+## Snippet 0x18
     rdtsc
     shl      rdx,0x20
     or       rax,rdx
@@ -291,7 +291,7 @@ Compares two consecutively obtained timestamps.
 
 The instruction rdtsc stores the current 64-bit timestamp counter value in edx:eax, while the shl and or instructions aggregate the halves of each register into rax. Trivially, the second timestamp will always be larger than the first one.
 
-Snippet 0x19
+## Snippet 0x19
 ```
     call     .skip
     db       'hello world!',0
@@ -303,7 +303,7 @@ Calls print_str("hello world!");.
 
 The return value of .skip is the address to the hardcoded string, and due to the stack layout, this will implicitly become the first argument of print_str.
 
-Snippet 0x1A
+## Snippet 0x1A
 ```
     call     .next
 .next:
@@ -311,20 +311,20 @@ Snippet 0x1A
 ```
 Gets the rip register after the call instruction, i.e. rax := .next.
 
-Snippet 0x1B
+## Snippet 0x1B
 ```
     push     rax
     ret
 ```
 Indirect branch to rax. Since there's no immediate arguments to cause further stack cleanup, this is equivalent to jmp rax.
 
-Snippet 0x1C
+## Snippet 0x1C
 ```
     pop      rsp
 ```
 Swaps the stack pointer with the address at the top of the current stack.
 
-Snippet 0x1D
+## Snippet 0x1D
 ```
     mov      rsp,buff2 + n*8 + 8
     mov      rbp,buff1 + n*8
@@ -334,7 +334,7 @@ Copies buff1 to buff2. The extra +1 and +8 take care of the side effects of ente
 
 Note that the buff2 should be 16 bytes larger than buff1, specifically with 8 bytes of padding at the beginning and at the end to prevent OOB writes after executing the enter instruction.
 
-Snippet 0x1E
+## Snippet 0x1E
 ```
     cmp      al,0x0a
     sbb      al,0x69
@@ -342,7 +342,7 @@ Snippet 0x1E
 ```
 Maps each value in range [0x0, 0xF] stored in al into its hexadecimal representation, i.e. [0x30, ..., 0x39, 0x41, ..., 0x46].
 
-Snippet 0x1F
+## Snippet 0x1F
 ```
 .loop:
     bsf      rcx,rax
@@ -357,7 +357,7 @@ Computes the Collatz sequence for any starting number stored in rax.
 
 See also: https://en.wikipedia.org/wiki/Collatz_conjecture
 
-Snippet 0x20
+## Snippet 0x20
 ```
     mov      rcx,rax
     shl      rcx,2
@@ -373,7 +373,7 @@ Snippet 0x20
 ```
 Computes rcx := 1337 * rax.
 
-Snippet 0x21
+## Snippet 0x21
 ```
     mov      rsi,rax
     add      rax,rbx
@@ -395,7 +395,7 @@ rax := rax * rcx - rbx * rdx
 rbx := rax * rdx + rbx * rcx
 This corresponds to the multiplication of two complex numbers: (a + bi) * (c + di) = (ac - bd) + (ad + bc)i.
 
-Snippet 0x22
+## Snippet 0x22
 ```
     mov      rdx,0xaaaaaaaaaaaaaaab
     mul      rdx
@@ -404,7 +404,7 @@ Snippet 0x22
 ```
 Computes rax := rax / 3 rounding to the closest integer.
 
-Snippet 0x23
+## Snippet 0x23
 ```
 .loop:
     cmp      rax,5
@@ -424,7 +424,7 @@ Snippet 0x23
 ```
 Computes rax := rax % 3.
 
-Snippet 0x24
+## Snippet 0x24
 ```
     mov      rbx,rax
     mov      rsi,rax
@@ -443,7 +443,7 @@ Snippet 0x24
 ```
 Computes rcx := rax % 2.
 
-Snippet 0x25
+## Snippet 0x25
 ```
     xor      eax,eax
     mov      rcx,1
@@ -472,7 +472,7 @@ Since (x,y) iterate each in range [0x0000, 0xFFFF] as rcx decreases. The value s
 
 This ratio of points will be 1 - pi/4, yielding an expected value of rax := 0x100000000 * (1 - pi/4).
 
-Snippet 0x26
+## Snippet 0x26
 ```
     mov      rdx,rax
     shr      rax,7
@@ -481,7 +481,7 @@ Snippet 0x26
 ```
 Rotates the value in the rax register 7 bits to the right. Equivalent to ror rax, 7.
 
-Snippet 0x27
+## Snippet 0x27
 ```
     mov      ch,cl
     inc      ch
@@ -497,7 +497,7 @@ The denominator in the expression above corresponds to the sequence A006125 as c
 
 TODO: Is there anything else special about this snippet?
 
-Snippet 0x28
+## Snippet 0x28
 ```
     clc
 .loop:
@@ -507,7 +507,7 @@ Snippet 0x28
 ```
 Left-shifts by one an entire buffer at rsi with a length of rcx bytes. This can also be interpreted as left-shifting by one, i.e. dividing by two, an arbitrarily long big-endian 8*rcx-bit integer at rsi.
 
-Snippet 0x29
+## Snippet 0x29
 ```
     lea      rdi,[rsi + 3]
     rep movsb
@@ -516,7 +516,7 @@ Repeats the first 3 bytes at rsi starting from offset rsi+3 until rcx bytes have
 
 This could be used to fill a texture of 24-bit pixels with a constant color stored in the first pixel of the buffer. In this case, the first 3 bytes would be written, and then the snippet would be executed with rcx := 3 * width * height - 3.
 
-Snippet 0x2A
+## Snippet 0x2A
 ```
     mov      rsi,rbx
     mov      rdi,rbx
@@ -530,7 +530,7 @@ This moves the last element of the array of rcx keywords pointed by rbx to the f
 
 For instance, let rcx := 4 and rbx point to [Q0, Q1, Q2, Q3, Q4] with quadwords Qi. Then, after executing this snippet the contents of rbx will be: [Q4, Q0, Q1, Q2, Q3].
 
-Snippet 0x2B
+## Snippet 0x2B
 ```
     xor      eax,eax
     xor      edx,edx
@@ -566,7 +566,7 @@ while (rbx[j] != rbx[i]) {
 }
 Since i == rbx[i], this loop will necessarily terminate and the linked list will be traversed again until the last element is reached.
 
-Snippet 0x2C
+## Snippet 0x2C
 ```
     mov      qword [rbx + 8*rcx],0
     mov      qword [rbx + 8*rdx],1
@@ -578,7 +578,7 @@ Snippet 0x2C
 ```
 This will move rsi or rdi into rax depending on whether rcx and rdx are different or not, respectively. This is equivalent to: rax := (rcx == rdx) ? rdi : rsi. This assumes that all rbx-relative offsets point to valid memory.
 
-Snippet 0x2D
+## Snippet 0x2D
 ```
     mov      rdx,rax
     dec      rax
@@ -586,7 +586,7 @@ Snippet 0x2D
 ```
 Determines if rax is a power of two by computing rax := rax & (rax - 1). The result will be zero if and only if rax is a power of two.
 
-Snippet 0x2E
+## Snippet 0x2E
 ```
     mov      rdx,rax
     dec      rdx
@@ -596,9 +596,9 @@ Snippet 0x2E
 ```
 Determines if rax is a power of two larger than zero by comparing (rax ^ (rax - 1)) >> 1 and rax - 1. Both values will be equal if and only if rax is a power of two larger than zero. Note that the case rax == 0 will result on different values due to the right-shift operation.
 
-See also: Snippet 0x2D.
+See also: ## Snippet 0x2D.
 
-Snippet 0x2F
+## Snippet 0x2F
 ```
     xor      eax,eax
 .loop:
@@ -610,11 +610,11 @@ Snippet 0x2F
     jmp      .loop
 .exit_loop:
 ```
-This snippet stores the number of 1-bits in rcx into the rax register. This relies on the trick features in Snippet 0x2D to clear the rightmost 1-bit until rcx is zero.
+This snippet stores the number of 1-bits in rcx into the rax register. This relies on the trick features in ## Snippet 0x2D to clear the rightmost 1-bit until rcx is zero.
 
-See also: Snippet 0x2D.
+See also: ## Snippet 0x2D.
 
-Snippet 0x30
+## Snippet 0x30
 ```
     and      rax,rdx
 
@@ -626,7 +626,7 @@ Snippet 0x30
 ```
 This snippet computes ((((rax & rdx) - rdx) & rdx) - 1) & rdx. This expression is equivalent to rax & rdx.
 
-Snippet 0x31
+## Snippet 0x31
     mov      rcx,rax
     shr      rcx,1
     xor      rcx,rax
@@ -640,7 +640,7 @@ Snippet 0x31
     xor      rdx,rcx
 Finds the highest power of two dividing rax + 1 by computing: ((rax >> 1) ^ rax) ^ (((rax + 1) >> 1) ^ (rax + 1)). This corresponds to the sequence: A006519 as rax increases. The first terms are: 1, 2, 1, 4, 1, 2, 1, 8, 1, 2, 1, 4, ...
 
-Snippet 0x32
+## Snippet 0x32
     mov      rcx,rax
 
     mov      rdx,rax
@@ -652,7 +652,7 @@ Snippet 0x32
     and      rax,1
 This computes rax := (popcnt((rax >> 1) ^ rax) ^ rax) & 1 where popcnt computes the number of 1-bits. This evaluates to 0 for all inital values of rax.
 
-Snippet 0x33
+## Snippet 0x33
     mov      rdx,rax
     shr      rdx,0x1
     xor      rax,rdx
@@ -686,7 +686,7 @@ rax := (rax >> 0x10) ^ rax
 rax := (rax >> 0x20) ^ rax
 See also: https://en.wikipedia.org/wiki/Gray_code
 
-Snippet 0x34
+## Snippet 0x34
     mov      ecx,eax
     and      ecx,0xffff0000
     shr      ecx,0x10
@@ -723,7 +723,7 @@ Snippet 0x34
     or       eax,ecx
 The snippet is made of five blocks, each aggregating and adding pairs of consecutive ranges of adjacent bits from the rax register. The size of this ranges in each block are respectively: 1, 2, 4, 8 and 16 bits.
 
-Snippet 0x35
+## Snippet 0x35
     mov      edx,eax
     and      eax,0x55555555
     shr      edx,0x1
@@ -755,9 +755,9 @@ Snippet 0x35
     add      eax,edx
 The snippet is made of five blocks, each aggregating and adding pairs of consecutive ranges of adjacent bits from the rax register. The size of this ranges in each block are respectively: 1, 2, 4, 8 and 16 bits.
 
-See also: Snippet 0x34.
+See also: ## Snippet 0x34.
 
-Snippet 0x36
+## Snippet 0x36
     dec      rax
 
     mov      rdx,rax
@@ -789,7 +789,7 @@ Maps positive values in rax to their next power of two, or itself if already a p
 
 This works by decreasing the number and replicating the most-significant non-zero bits to all their relatively least-significant bits, resulting in a value of the form 2^N - 1. Finally, the number is incremented to obtain the desired power of two.
 
-Snippet 0x37
+## Snippet 0x37
     mov      rdx,rax
     not      rdx
     mov      rcx,0x8080808080808080
@@ -811,7 +811,7 @@ FF01010000000000 => 0080808080808080
 ...
 TODO: It's not clear whether this is a bug, or a feature.
 
-Snippet 0x38
+## Snippet 0x38
     bsf      rcx,rax
 
     mov      rdx,rax
@@ -833,7 +833,7 @@ Snippet 0x38
     or       rax,rdx
 TODO: No idea about this one.
 
-Snippet 0x39
+## Snippet 0x39
     mov      rdx,0xaaaaaaaaaaaaaaaa
     add      rax,rdx
     xor      rax,rdx
@@ -841,7 +841,7 @@ Computes the negabinary representation of rax.
 
 Instead of having the binary basis (+1, +2, +4, +8, +16, +32, ...), negabinary numbers have the basis (+1, -2, +4, -8, +16, -32, ...). For instance, the number 3 (i.e. 0b11) gets mapped into 0b111 (i.e. 7) since 3 = 4 - 2 + 1.
 
-Snippet 0x3A
+## Snippet 0x3A
     mov      rdx,rax
     neg      rdx
     and      rax,rdx
@@ -859,7 +859,7 @@ The second block together with the xlatb instruction computes rax := rbx[(rax * 
 
 See also: http://supertech.csail.mit.edu/papers/debruijn.pdf
 
-Snippet 0x3B
+## Snippet 0x3B
     cdq
     shl      eax,1
     and      edx,0xc0000401
@@ -872,7 +872,7 @@ else
     eax = (eax * 2) ^ 0xC0000401
 TODO: Is there anything else special about this snippet?
 
-Snippet 0x3C
+## Snippet 0x3C
     mov      rbx,rax
     mov      rdx,rbx
     mov      rcx,0xaaaaaaaaaaaaaaaa
@@ -898,7 +898,7 @@ Snippet 0x3C
     sub      rdx,rbx
 TODO: No idea about this one.
 
-Snippet 0x3D
+## Snippet 0x3D
     mov      rcx,1
 .loop:
     xor      rax,rcx
@@ -915,7 +915,7 @@ Snippet 0x3D
     jnz      .loop
 TODO: No idea about this one.
 
-Snippet 0x3E
+## Snippet 0x3E
     mov      rdx,rax
     shr      rdx,1
     xor      rax,rdx
@@ -924,7 +924,7 @@ Snippet 0x3E
     and      rax,0x3
 Computes the direction of the lines in the (Heighway) Dragon Curve by computing popcnt(rax ^ (rax >> 1)) & 3. This produces the sequence A246960, the fixed point of the morphism {0 -> (0,1), 1 -> (2,1), 2 -> (2,3), 3 -> (0,3)}.
 
-Snippet 0x3F
+## Snippet 0x3F
     mov      rbx,3
     mov      r8,rax
     mov      rcx,rax
